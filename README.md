@@ -1,4 +1,4 @@
-# Rawpixel public domain image downloader
+# Rawpixel bulk image downloader
 
 Automated tool for downloading CC0 licenced images from Rawpixel using browser automation. Downloads high-resolution images and saves comprehensive metadata to CSV.
 
