@@ -8,8 +8,8 @@ Automated tool for downloading CC0 licenced images from Rawpixel using browser a
 - ✅ Multi-page support - automatically paginate through large boards
 - ✅ CC0 license verification - only downloads public domain images
 - ✅ Metadata extraction - saves title, artist, description, tags, and more to CSV
-- ✅ No authentication required for public CC0 images
-- ✅ Progress tracking with terminal output
+- ✅ Script to set up user authentication, required for downloading high resolution CC0 images
+- ✅ Progress tracking with terminal output.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ If you prefer to set up the cookie manually, copy `.env.example` to `.env` and f
 
 ## Usage
 
-### Interactive Mode (Recommended)
+### Interactive mode (recommended)
 
 Simply run the script and follow the prompts:
 
@@ -73,7 +73,7 @@ The script will ask you for:
 1. **Board URL** - The Rawpixel board/collection URL to download from
 2. **Format** - Choose between high-resolution JPEG (recommended) or original TIFF
 
-### Command Line Mode
+### Command line mode
 
 You can also provide the board URL directly:
 
@@ -87,30 +87,14 @@ Or:
 node rp-downloader.js 'https://www.rawpixel.com/search?page=1&path=1522.3.sub_topic-2791&sort=curated'
 ```
 
-### Finding Board URLs
+### Finding board URLs
 
 1. Go to [Rawpixel.com](https://www.rawpixel.com)
 2. Browse to any public domain board or collection
 3. Copy the URL from your browser address bar
 4. Paste it when prompted (or use as command line argument)
 
-## Output
-
-### Folder Structure
-
-Downloads are organized by board name:
-
-```
-images/
-└── Floreal_Dessins_&_Coloris_Nouveaux_by_E.A._Seguy/
-    ├── 5896135_Floral_colorful_background,_vintage_art.jpg
-    ├── 5928464_Vintage_art_deco_&_art.jpg
-    ├── 5900575_Floral_colorful_background,_vintage_art.jpg
-    ├── ...
-    └── metadata.csv
-```
-
-### Metadata CSV
+## Metadata CSV
 
 The `metadata.csv` file contains detailed information for each downloaded image:
 
@@ -126,14 +110,7 @@ The `metadata.csv` file contains detailed information for each downloaded image:
 | `date` | Publication date (if available) |
 | `url` | Direct link to the image page |
 
-### Sample CSV output
-
-```csv
-"filename","imageId","title","artist","license","description","tags","date","url"
-"5896135_Floral_colorful_background,_vintage_art.jpg","5896135","Floral colorful background, vintage art","","CC0","Download free image of Floral colorful background...","Images, Illustrations","PNGPSDVector","https://www.rawpixel.com/image/5896135/..."
-```
-
-## Browser Visibility
+## Browser visibility
 
 By default, the browser window is visible so you can see the download progress. This is useful for:
 - Monitoring the process
@@ -152,55 +129,11 @@ headless: true
 
 ## Troubleshooting
 
-### "Timeout exceeded while waiting for download"
+If there are errors downloading it could be that:
 
-**Cause:** Rate limiting or network issues
-
-**Solutions:**
-- Wait 1-2 hours before retrying (account cooldown)
-- Add a session cookie for authenticated access
-- Check your internet connection
-
-### "No images found"
-
-**Cause:** Invalid board URL or private board
-
-**Solutions:**
-- Verify the board URL is correct
-- Check the board is public
-- Try adding authentication if it's a member-only board
-
-### "Could not find download button"
-
-**Cause:** Page layout changed or non-CC0 image
-
-**Solutions:**
-- Verify the images are CC0 licensed
-- The script automatically skips non-CC0 images
-- Rawpixel may have updated their page structure
-
-### Browser won't close
-
-**Cause:** Script error or timeout
-
-**Solution:**
-- Press Ctrl+C to force quit
-- Close the browser window manually
-- Check the terminal for error messages
-
-## Delays and rate limiting
-
-The script includes built-in delays to be respectful to Rawpixel's servers:
-
-- 3 seconds between page fetches
-- 2 seconds between image downloads
-- 2 seconds between pagination checks
-
-**Do not reduce these delays** as it may result in:
-- IP blocking
-- Account suspension
-- Download failures
-
+- You're hitting rate limits. Wait for a while and try later.
+- The boards contain non-public domain images. Check the image licences.
+- Rawpixel have changed the structure of their pages. Drat.
 
 ## License
 
